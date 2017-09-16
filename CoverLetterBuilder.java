@@ -5,6 +5,8 @@ import java.io.*;
 
 public class CoverLetterBuilder {
 
+	public static String current_letter = "Letters_Blank/Pre_Graduation_Letter"
+
 	public static void main(String[] args) {
 
 		String companyName = "companyName";
@@ -26,9 +28,9 @@ public class CoverLetterBuilder {
 
 	}
 
-	// Program that calls everything together. 
+	// Program that calls everything together.
 	public static void fin(String companyName, String jobTitle) {
-		String[] text = readInFile("");
+		String[] text = readInFile();
 		text = categories(text, companyName, jobTitle);
 		write(text, companyName);
 	}
@@ -36,7 +38,7 @@ public class CoverLetterBuilder {
 	// Return a cover letter whose name is included in the cover letter file name
 	public static void write(String[] text, String companyName) {
 		try {
-			File file = new File(companyName + "Letter.doc");
+			File file = new File(companyName + "_Letter.doc");
 
 			if (!file.exists()) {
 				file.createNewFile();
@@ -55,12 +57,12 @@ public class CoverLetterBuilder {
 			bw.close();
 		} catch (IOException e) {
 			System.out.println("You are Exceptional!");
-		} 
+		}
 
 
 	}
 
-	// Basic search for the category names. They cannot end a sentence as a '.' will mess things up	
+	// Basic search for the category names. They cannot end a sentence as a '.' will mess things up
 	public static String[] categories(String[] text, String companyName, String jobTitle) {
 		for(int i = 0; i < text.length; i++) {
 			String word = text[i].toLowerCase();
@@ -73,19 +75,19 @@ public class CoverLetterBuilder {
 		return text;
 	}
 
-	// Read in the file and return an array of the words. 
-	public static String[] readInFile(String fileName) {
+	// Read in the file and return an array of the words.
+	public static String[] readInFile() {
 		String ret = "";
 		BufferedReader br;
 		try {
-            br = new BufferedReader(new FileReader("BlankLetter.txt"));
+            br = new BufferedReader(new FileReader(current_letter));
             try {
                 String x;
                 while ((x = br.readLine()) != null ) {
                     // printing out each line in the file
                     //System.out.println(x);
                     ret += x;
-                } 
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
