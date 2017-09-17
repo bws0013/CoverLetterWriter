@@ -15,21 +15,6 @@ public class CoverLetterBuilder {
 
 	public static void main(String[] args) {
 
-		// String companyName = "companyName";
-		// String jobTitle = "jobTitle";
-		//
-		// //System.out.printf("%s %s")
-		//
-		// Scanner in = new Scanner(System.in);
-		//
-		// System.out.print("companyName: ");
-		// companyName = in.nextLine();
-		//
-		// System.out.print("jobTitle: ");
-		// jobTitle = in.nextLine();
-		//
-		// write_a_letter(companyName, jobTitle);
-
 		String[] possible_jobs = read_in_company_list();
 		for(String job : possible_jobs) {
 			write_a_letter(job);
@@ -40,12 +25,11 @@ public class CoverLetterBuilder {
 	public static void write_a_letter(String company_and_job) {
 		String[] job_elements = company_and_job.split(",");
 		String[] text = read_in_letter();
-		text = categories(text, job_elements[0], job_elements[1]);
-		text = remove_excess_space(text);
 
-		for(String t : text) {
-			System.out.println(t);
-		}
+		String companyName = remove_excess_space(job_elements[0]);
+		String jobTitle = remove_excess_space(job_elements[1]);
+
+		text = categories(text, companyName, jobTitle);
 
 		write(text, job_elements[0]);
 	}
@@ -69,9 +53,18 @@ public class CoverLetterBuilder {
 			BufferedWriter bw = new BufferedWriter(fw);
 
 			for(int i = 0; i < text.length; i++) {
-				if(text[i].equals("#")) {
+				if(text[i].contains("##")) {
 					bw.write('\n');
 					bw.write('\n');
+					bw.write('\n');
+					bw.write('\n');
+					bw.write(text[i].substring(2) + " ");
+				} else if (text[i].contains("#")) {
+					bw.write('\n');
+					bw.write('\n');
+					if (text.length != 1) {
+						bw.write(text[i].substring(1) + " ");
+					}
 				} else {
 					bw.write(text[i] + " ");
 				}
@@ -82,11 +75,12 @@ public class CoverLetterBuilder {
 		}
 	}
 
-	public static String[] remove_excess_space(String[] lines) {
-		for(int i = 0; i < lines.length; i++) {
-			lines[i] = lines[i].replaceAll("\\s+", " ");
+	// Used in case there are too many spaces in the input csv.
+	public static String remove_excess_space(String line) {
+		if (line.charAt(0) == ' ') {
+			line = line.substring(1);
 		}
-		return lines;
+		return line.replaceAll("\\s+", " ");
 	}
 
 	// Basic search for the category names. They cannot end a sentence as a '.' will mess things up
@@ -158,8 +152,4 @@ public class CoverLetterBuilder {
     String arr[] = sb.toString().split(" ");
 		return arr;
 	}
-
-
-
-
 }
