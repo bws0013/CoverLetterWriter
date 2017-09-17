@@ -19,3 +19,7 @@
 *.zip
 *.tar.gz
 *.rar
+
+Letters_Demo_Output/*
+Letters_Input/*
+Letters_Output/*

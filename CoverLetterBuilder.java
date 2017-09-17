@@ -5,7 +5,10 @@ import java.io.*;
 
 public class CoverLetterBuilder {
 
-	public static String current_letter = "Letters_Blank/Pre_Graduation_Letter"
+	public static String input_dir = "./Letters_Demo_Input/";
+	public static String output_dir = "./Letters_Demo_Output/";
+
+	public static String current_letter = input_dir + "Pre_Graduation_Letter.txt";
 
 	public static void main(String[] args) {
 
@@ -38,7 +41,7 @@ public class CoverLetterBuilder {
 	// Return a cover letter whose name is included in the cover letter file name
 	public static void write(String[] text, String companyName) {
 		try {
-			File file = new File(companyName + "_Letter.doc");
+			File file = new File(output_dir + companyName + "_Letter.doc");
 
 			if (!file.exists()) {
 				file.createNewFile();
@@ -77,7 +80,7 @@ public class CoverLetterBuilder {
 
 	// Read in the file and return an array of the words.
 	public static String[] readInFile() {
-		String ret = "";
+		StringBuilder sb = new StringBuilder();
 		BufferedReader br;
 		try {
             br = new BufferedReader(new FileReader(current_letter));
@@ -86,7 +89,8 @@ public class CoverLetterBuilder {
                 while ((x = br.readLine()) != null ) {
                     // printing out each line in the file
                     //System.out.println(x);
-                    ret += x;
+                    // ret += x;
+										sb.append(x);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -95,7 +99,7 @@ public class CoverLetterBuilder {
             System.out.println(e);
             e.printStackTrace();
         }
-        String arr[] = ret.split(" ");
+        String arr[] = sb.toString().split(" ");
 		return arr;
 	}
 
