@@ -5,21 +5,33 @@ import java.io.*;
 
 public class CoverLetterBuilder {
 
+  // Dirs for reading and writing
   public static String input_dir = "./Letters_Demo_Input/";
   public static String output_dir = "./Letters_Demo_Output/";
   public static String company_list_dir = "./Company_List_Folder/";
 
-  // TODO: Remove the below 2 globals, put in collect input methods
-  public static String current_letter = input_dir + "Pre_Graduation_Letter.txt";
-  public static String current_company_list = company_list_dir + "Example_List.csv";
+  public static String current_letter = input_dir;
 
   public static void main(String[] args) {
 
-    String[] possible_jobs = read_in_company_list();
+    Scanner in = new Scanner(System.in);
+
+    System.out.print("Enter the filename of your company list: ");
+    String company_list_file = in.nextLine();
+    System.out.println();
+    System.out.print("Enter the filename of the your template letter: ");
+    current_letter += in.nextLine();
+    System.out.println();
+    System.out.println("Processing...");
+
+    String[] possible_jobs = read_in_company_list(company_list_dir + company_list_file);
     for(String job : possible_jobs) {
       write_a_letter(job);
     }
+
+    System.out.println("Finished!");
   }
+
 
   // Program that calls everything together given a line of csv.
   public static void write_a_letter(String company_and_job) {
@@ -97,7 +109,7 @@ public class CoverLetterBuilder {
   }
 
   // Read in the list of companies and positions to make letters for
-  public static String[] read_in_company_list() {
+  public static String[] read_in_company_list(String current_company_list) {
     String csvFile = current_company_list;
     String line = "";
 

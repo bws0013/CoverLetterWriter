@@ -10,3 +10,14 @@ Ben Smith (8/21/16)
 Update as of 10/17/17
 
 I am just updating this project to accept a list of companies and job names and make a series of letters.
+
+*****
+
+Update as of 10/18/17
+
+This project accepts a csv file which should contain job title,job name. The program reads through this file and creates cover letters following the input template.
+
+Include the template inside of Letters_Demo_Input
+Include the company,job list inside of Letters_Demo_Input
+
+Before running the program run the pre_run_script_demo.sh script (./pre_run_script_demo.sh). This will create all of the directories for you so that you don't need to worry about spelling.
