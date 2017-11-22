@@ -14,6 +14,16 @@ public class CoverLetterBuilder {
 
   public static void main(String[] args) {
 
+    // The next if statement is if you are only passing in a company and job
+    // and are not looking to make a whole csv file for it. Applying serially.
+    if(args.length > 0) {
+      args[0] = args[0].substring(0, 1).toUpperCase() + args[0].substring(1);
+      String job_line = String.join(" ", args);
+      current_letter += "Pre_Graduation_Letter.txt";
+      write_a_letter(job_line);
+      return;
+    }
+
     Scanner in = new Scanner(System.in);
 
     System.out.print("Enter the filename of your company list: ");
